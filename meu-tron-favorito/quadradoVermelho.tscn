@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://bo4fslmme8yrf"]
+
+[ext_resource type="Texture2D" uid="uid://c21luk0cq3l4m" path="res://arts/quadrado-vermelho.png" id="1_mlmx6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yjjj8"]
+size = Vector2(57.5, 29.5)
+
+[node name="vermelho" type="CharacterBody2D" unique_id=1667252972]
+position = Vector2(1050, 331)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=358202263]
+scale = Vector2(0.07770272, 0.039864916)
+texture = ExtResource("1_mlmx6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1553076220]
+shape = SubResource("RectangleShape2D_yjjj8")
