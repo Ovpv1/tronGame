@@ -6,12 +6,11 @@
 
 extends Node2D
 
-# Substitua "Timer" pelo nome exato do seu nó Timer na cena
 @onready var meutimer: Timer = $Timer
 @onready var azul: CharacterBody2D = $azul
 @onready var vermelho: CharacterBody2D = $vermelho
-@onready var velocidade = azul.velocidade
-var velMax = 300 #PODE ALTERAR PRA CALIBRAR
+@onready var velocidadeBonecos: float
+var velMax: float = 550.0 #PODE ALTERAR PRA CALIBRAR
 
 var segundos_decorridos: int = 0
 
@@ -24,15 +23,16 @@ func _ready() -> void:
 	meutimer.start()
 
 
-#CHECAR VELOCIDADE DEPOIS
 func _on_timer_timeout() -> void:
+	velocidadeBonecos = azul.velocidade
 	segundos_decorridos += 1
 	# Aumenta a velocidade do jogador a cada segundo
 	if(segundos_decorridos > 30):
-		if(velocidade < velMax):
-			azul.velocidade += 25
-			vermelho.velocidade += 25
-		elif(velocidade > velMax):
+		if(velocidadeBonecos >= velMax):
 			azul.velocidade = velMax
 			vermelho.velocidade = velMax
-	print(segundos_decorridos)
+		else:
+			azul.velocidade += 25
+			vermelho.velocidade += 25
+			
+	print(azul.velocidade)

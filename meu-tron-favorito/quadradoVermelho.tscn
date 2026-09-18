@@ -1,15 +1,17 @@
 [gd_scene format=3 uid="uid://bo4fslmme8yrf"]
 
+[ext_resource type="Script" uid="uid://bbx75hd4o0kwe" path="res://quadrado_vermelho.gd" id="1_fxrsv"]
 [ext_resource type="Texture2D" uid="uid://c21luk0cq3l4m" path="res://arts/quadrado-vermelho.png" id="1_mlmx6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yjjj8"]
-size = Vector2(57.5, 29.5)
+size = Vector2(60, 32)
 
 [node name="vermelho" type="CharacterBody2D" unique_id=1667252972]
-position = Vector2(1050, 331)
+script = ExtResource("1_fxrsv")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=358202263]
-scale = Vector2(0.07770272, 0.039864916)
+position = Vector2(0, 8.940697e-07)
+scale = Vector2(0.08108108, 0.04324324)
 texture = ExtResource("1_mlmx6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1553076220]

@@ -1,16 +1,17 @@
 [gd_scene format=3 uid="uid://c5344ay2sju7t"]
 
 [ext_resource type="Texture2D" uid="uid://dvxa85syvtnh5" path="res://arts/quadradoAzul.webp" id="1_2juiu"]
+[ext_resource type="Script" uid="uid://ysu6cklr5jpr" path="res://quadrado_azul.gd" id="1_y3d7f"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yjjj8"]
-size = Vector2(55, 28.125)
+size = Vector2(62, 32)
 
 [node name="azul" type="CharacterBody2D" unique_id=1728117659]
-position = Vector2(65, 279)
+script = ExtResource("1_y3d7f")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=131973550]
+scale = Vector2(0.078, 0.04)
+texture = ExtResource("1_2juiu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=392151138]
 shape = SubResource("RectangleShape2D_yjjj8")
-
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=131973550]
-scale = Vector2(0.06871093, 0.03529296)
-texture = ExtResource("1_2juiu")
