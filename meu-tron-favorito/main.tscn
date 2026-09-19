@@ -22,12 +22,12 @@ b = Vector2(0, 651)
 script = ExtResource("1_lquwl")
 
 [node name="azul" parent="." unique_id=1728117659 instance=ExtResource("3_lquwl")]
-position = Vector2(86, 300)
+position = Vector2(100, 548)
 rotation = 1.5707964
 scale = Vector2(0.5, 0.5)
 
 [node name="vermelho" parent="." unique_id=1667252972 instance=ExtResource("1_h2yge")]
-position = Vector2(1050, 300)
+position = Vector2(1052, 100)
 rotation = 1.5707964
 scale = Vector2(0.5, 0.5)
 
@@ -48,3 +48,5 @@ shape = SubResource("SegmentShape2D_272bh")
 
 [node name="paredeDir" type="CollisionShape2D" parent="paredes" unique_id=839943121]
 shape = SubResource("SegmentShape2D_kek77")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

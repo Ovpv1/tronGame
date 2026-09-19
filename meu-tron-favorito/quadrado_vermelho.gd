@@ -1,7 +1,6 @@
 extends CharacterBody2D
 
 @export var velocidade: float = 250.0
-
 var direcao_atual: Vector2 = Vector2.ZERO
 
 func _physics_process(_delta: float) -> void:
@@ -20,11 +19,3 @@ func _physics_process(_delta: float) -> void:
 
 	velocity = direcao_atual * velocidade
 	move_and_slide()
-
-
-func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body == self:
-		return
-
-	if body is CharacterBody2D:
-		direcao_atual = Vector2.ZERO
