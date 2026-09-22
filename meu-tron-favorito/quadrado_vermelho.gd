@@ -3,7 +3,7 @@ extends CharacterBody2D
 @export var distancia_segmento: float = 4.0
 
 var ultima_posicao_colisao: Vector2
-@export var max_pontos: int = 500
+@export var max_pontos: int = 0
 @onready var rastroVermelho: Line2D = $Line2D
 
 @export var velocidade: float = 250.0
@@ -31,14 +31,11 @@ func _physics_process(_delta: float) -> void:
 		direcao_atual = Vector2.DOWN
 		$".".rotation_degrees = 90
 	
-	if velocity != Vector2.ZERO:
-		rastroVermelho.add_point(global_position)
-		if max_pontos > 0 and rastroVermelho.points.size() > max_pontos:
-			rastroVermelho.remove_point(0)
-			
-		if global_position.distance_to(ultima_posicao_colisao) >= distancia_segmento:
-			criar_segmento_colisao(ultima_posicao_colisao, global_position)
-			ultima_posicao_colisao = global_position
+
+	rastroVermelho.add_point(global_position)
+	if global_position.distance_to(ultima_posicao_colisao) >= distancia_segmento:
+		criar_segmento_colisao(ultima_posicao_colisao, global_position)
+		ultima_posicao_colisao = global_position
 	
 	if Input.is_action_pressed("boostVermelho"):
 		velocity = direcao_atual * (velocidade + 100)
@@ -68,10 +65,10 @@ func criar_segmento_colisao(ponto_a: Vector2, ponto_b: Vector2) -> void:
 	await get_tree().create_timer(0.15).timeout
 	area.body_entered.connect(_on_rastro_colidiu.bind(area))
 
-func _on_rastro_colidiu(body: Node2D) -> void:
+func _on_rastro_colidiu(body: Node2D, area: Area2D) -> void:
 	if body.has_method("derrota"):
-		body.derrota()
-		
+		var donoRastro = area.get_meta("dono")
+		body.derrota(donoRastro)
 
 func derrota(donoRastro: Node2D = null) -> void:
 	if not estaVivo:
@@ -85,7 +82,7 @@ func derrota(donoRastro: Node2D = null) -> void:
 		print("\nVermelho se suicidou batendo no próprio rastro")
 	else:
 		print("\nVermelho bateu no rastro do Azul")
-	velocity = Vector2.ZERO
+		
 	print("\nFIM DE JOGO\n")
 	
 	await get_tree().create_timer(5).timeout
