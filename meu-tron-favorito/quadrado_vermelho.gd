@@ -1,9 +1,23 @@
 extends CharacterBody2D
 
+@export var distancia_segmento: float = 4.0
+
+var ultima_posicao_colisao: Vector2
+@export var max_pontos: int = 500
+@onready var rastroVermelho: Line2D = $Line2D
+
 @export var velocidade: float = 250.0
-var direcao_atual: Vector2 = Vector2.ZERO
+var direcao_atual: Vector2 = Vector2.DOWN
+
+var estaVivo: bool = true
+
+func _ready() -> void:
+	rastroVermelho.top_level = true
+	ultima_posicao_colisao = global_position
 
 func _physics_process(_delta: float) -> void:
+	if not estaVivo:
+		return
 	if Input.is_action_just_pressed("moverEsquerdaVermelho") and direcao_atual != Vector2.RIGHT:
 		direcao_atual = Vector2.LEFT
 		$".".rotation_degrees = 0
@@ -16,6 +30,64 @@ func _physics_process(_delta: float) -> void:
 	elif Input.is_action_just_pressed("moverBaixoVermelho") and direcao_atual != Vector2.UP:
 		direcao_atual = Vector2.DOWN
 		$".".rotation_degrees = 90
-
-	velocity = direcao_atual * velocidade
+	
+	if velocity != Vector2.ZERO:
+		rastroVermelho.add_point(global_position)
+		if max_pontos > 0 and rastroVermelho.points.size() > max_pontos:
+			rastroVermelho.remove_point(0)
+			
+		if global_position.distance_to(ultima_posicao_colisao) >= distancia_segmento:
+			criar_segmento_colisao(ultima_posicao_colisao, global_position)
+			ultima_posicao_colisao = global_position
+	
+	if Input.is_action_pressed("boostVermelho"):
+		velocity = direcao_atual * (velocidade + 100)
+	else:
+		velocity = direcao_atual * velocidade
 	move_and_slide()
+	
+	if get_slide_collision_count() > 0:
+		derrota()
+		return
+
+
+
+func criar_segmento_colisao(ponto_a: Vector2, ponto_b: Vector2) -> void:
+	var area = Area2D.new()
+	var collision = CollisionShape2D.new()
+	var shape = SegmentShape2D.new()
+
+	# Define a linha de colisão entre o ponto anterior e o atual
+	shape.a = ponto_a
+	shape.b = ponto_b
+	collision.shape = shape
+	area.add_child(collision)
+
+	area.set_meta("dono", self)
+	get_tree().current_scene.add_child(area)
+	await get_tree().create_timer(0.15).timeout
+	area.body_entered.connect(_on_rastro_colidiu.bind(area))
+
+func _on_rastro_colidiu(body: Node2D) -> void:
+	if body.has_method("derrota"):
+		body.derrota()
+		
+
+func derrota(donoRastro: Node2D = null) -> void:
+	if not estaVivo:
+		return
+	
+	get_tree().paused = true
+	estaVivo = false
+	if donoRastro == null:
+		print("\nVermelho bateu na parede.")
+	elif donoRastro == self:
+		print("\nVermelho se suicidou batendo no próprio rastro")
+	else:
+		print("\nVermelho bateu no rastro do Azul")
+	velocity = Vector2.ZERO
+	print("\nFIM DE JOGO\n")
+	
+	await get_tree().create_timer(5).timeout
+	get_tree().paused = false
+	get_tree().reload_current_scene()

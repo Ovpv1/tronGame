@@ -1,9 +1,8 @@
-[gd_scene format=3 uid="uid://bhbauh35fqsad"]
+[gd_scene format=3 uid="uid://csh7gmb5h4a5d"]
 
-[ext_resource type="PackedScene" uid="uid://bo4fslmme8yrf" path="res://quadradoVermelho.tscn" id="1_h2yge"]
-[ext_resource type="Script" uid="uid://cxhiyv2q47yd8" path="res://main.gd" id="1_lquwl"]
-[ext_resource type="PackedScene" uid="uid://c5344ay2sju7t" path="res://quadradoAzul.tscn" id="3_lquwl"]
-[ext_resource type="AudioStream" uid="uid://daq5afwk03fvw" path="res://Tron_Game 1.0.mp3" id="4_1bvp3"]
+[ext_resource type="Script" uid="uid://cfhpf6hctcyna" path="res://pista.gd" id="1_i6cd8"]
+[ext_resource type="PackedScene" uid="uid://c5344ay2sju7t" path="res://quadradoAzul.tscn" id="3_tegwg"]
+[ext_resource type="PackedScene" uid="uid://bo4fslmme8yrf" path="res://quadradoVermelho.tscn" id="4_1s62e"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_bqdci"]
 b = Vector2(1186, 0)
@@ -19,22 +18,18 @@ b = Vector2(0, -15)
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_kek77"]
 b = Vector2(0, 651)
 
-[node name="Node2D" type="Node2D" unique_id=1581693587]
-script = ExtResource("1_lquwl")
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1441013931]
-process_mode = 3
-stream = ExtResource("4_1bvp3")
+[node name="pista" type="Node2D" unique_id=1581693587]
+script = ExtResource("1_i6cd8")
 
 [node name="Timer" type="Timer" parent="." unique_id=1831358329]
 autostart = true
 
-[node name="azul" parent="." unique_id=1728117659 instance=ExtResource("3_lquwl")]
+[node name="azul" parent="." unique_id=1728117659 instance=ExtResource("3_tegwg")]
 position = Vector2(100, 548)
 rotation = 1.5707964
 scale = Vector2(0.5, 0.5)
 
-[node name="vermelho" parent="." unique_id=1667252972 instance=ExtResource("1_h2yge")]
+[node name="vermelho" parent="." unique_id=1667252972 instance=ExtResource("4_1s62e")]
 position = Vector2(1052, 100)
 rotation = 1.5707964
 scale = Vector2(0.5, 0.5)

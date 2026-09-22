@@ -1,5 +1,5 @@
 # Pontos a serem feitos
-# 1. Adicionar linha dos dois jogadores
+# 1. Adicionar linha dos dois jogadores ----> concluído
 # 2. A física da colisão ao bater na linha do inimigo
 # 3. Empate caso jogadores colidam de frente
 # 4. Derrota caso jogador colida com a lateral do outro
@@ -14,10 +14,12 @@ extends Node2D
 var velMax: float = 600.0 #PODE ALTERAR PRA CALIBRAR, mas acho que está suficiente
 var segundos_decorridos: int = 0
 
+
 func _ready() -> void:
+	print("------- TRON GAME ------")
 	timer.start()
-	azul.direcao_atual = Vector2.UP
-	vermelho.direcao_atual = Vector2.DOWN
+	$AudioStreamPlayer.play()
+
 
 func _on_timer_timeout() -> void:
 	velocidadeBonecos = azul.velocidade
@@ -31,6 +33,6 @@ func _on_timer_timeout() -> void:
 		else:
 			azul.velocidade += 25
 			vermelho.velocidade += 25
-	#So pra visualizar melhor as alteracoes no console		
+	#So pra visualizar melhor as alteracoes no console
 	print(segundos_decorridos,"s")
 	print("Velocidade: ",velocidadeBonecos)
