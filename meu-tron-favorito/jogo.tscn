@@ -1,8 +1,0 @@
-[gd_scene format=3 uid="uid://u3gx6ijmv38d"]
-
-[ext_resource type="Script" uid="uid://br2dwguob48lb" path="res://dadosJogo.gd" id="1_kxg5b"]
-
-[node name="dadosJogo" type="Node2D" unique_id=1581671715]
-script = ExtResource("1_kxg5b")
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1468077947]
