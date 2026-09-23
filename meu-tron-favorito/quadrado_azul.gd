@@ -5,7 +5,7 @@ var ultima_posicao_colisao: Vector2
 @export var max_pontos: int = 0
 @onready var rastroAzul: Line2D = $Line2D
 
-@export var velocidade: float = 250.0
+@export var velocidade: float = 150.0
 var direcao_atual: Vector2 = Vector2.UP
 
 var estaVivo: bool = true
