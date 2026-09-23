@@ -1,4 +1,4 @@
-# Trabalho de Experimentação Orientada
+# Trabalho de Experimentação de Protótipos
 - Jogo inspirado em Tron para trabalho da faculdade
 ## Integrantes:
 - Isaque dos Santos - 2610304
